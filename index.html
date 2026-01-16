@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nivi</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+
+<header id="header">
+        <div class="logo">NIVI<span>.</span></div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#resume">Resume</a></li>
+                <li><a href="#work">Work</a></li>
+               
+            </ul>
+            <a href="#" class="hire-btn">Hire me</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+               
+                <h1>Hello I'm <br><span>Nimesh kolmabge</span></h1>
+                 <span class="role">Software Developer</span>
+                <p>I excel at crafting elegant digital experiences and I am proficient in various programming languages and technologies.</p>
+                
+                <div class="hero-btns">
+                    <a href="#" class="cv-download">DOWNLOAD CV <i class="fas fa-download"></i></a>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image-container">
+                <!-- Blob Background -->
+                <div class="blob-bg"></div>
+                <div class="blob-accent blob-accent-1"></div>
+                <div class="blob-accent blob-accent-2"></div>
+                
+                <!-- Main Profile Image -->
+                <div class="profile-wrapper">
+                    <img src="assets/image.png" alt="Nimesh Kolmabge" class="main-profile-img">
+                </div>
+                
+                <!-- Floating Tech Skills Cards -->
+                <div class="floating-card projects-card">
+                    <div class="icon-box">
+                        <i class="fab fa-react"></i>
+                    </div>
+                </div>
+
+                <div class="floating-card tech-card">
+                    <div class="icon-box tech-icon">
+                        <i class="fab fa-html5"></i>
+                    </div>
+                </div>
+
+                <div class="floating-card rating-card">
+                    <div class="icon-box rating-icon">
+                        <i class="fab fa-css3-alt"></i>
+                    </div>
+                </div>
+                <div class="floating-card js-card">
+    <div class="icon-box">
+        <i class="fab fa-js"></i>
+    </div>
+</div>
+
+<div class="floating-card node-card">
+    <div class="icon-box">
+        <i class="fab fa-java"></i>
+    </div>
+</div>
+
+                
+                <!-- Small decorative dots -->
+                <div class="deco-dots dots-1"></div>
+                <div class="deco-dots dots-2"></div>
+            </div>
+           
+        </section>
+    </main>
+
+<section id="about" class="about-section">
+    <div class="container">
+        <h2 class="section-title">About me?</h2>
+        
+        <div class="about-wrapper glass-card">
+            <div class="about-services">
+                <div class="service-item">
+                    <div class="service-icon"><i class="fas fa-code"></i></div>
+                    <div class="service-text">Website Development</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <div class="service-text">App Development</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon"><i class="fas fa-server"></i></div>
+                    <div class="service-text">Website Hosting</div>
+                </div>
+                <div class="timeline-line"></div>
+            </div>
+
+            <div class="about-main-content">
+                <p class="description">
+                   Hi! I'm Nimesh Kolambage, a passionate and creative software engineering student with a strong interest in building sleek and user-friendly web applications. I love combining clean design with efficient functionality to create digital experiences that are both visually appealing and highly functional.
+
+                  I enjoy learning new technologies, exploring UI/UX design trends, and taking on challenges that help me grow as a developer. Whether it’s coding, designing, or problem-solving, I’m always eager to push boundaries and deliver my best work.
+
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="resume" class="resume-section">
+    <div class="container">
+        <div class="resume-layout">
+            <div class="resume-left">
+                <h2 class="resume-title">Why hire me?</h2>
+                <p class="resume-desc">I combine technical expertise with a passion for clean code and user-centric digital solutions.</p>
+                <div class="resume-menu">
+                    <button class="resume-btn active" onclick="openTab(event, 'education')">Education</button>
+                    <button class="resume-btn" onclick="openTab(event, 'skills')">Skills</button>
+                    <button class="resume-btn" onclick="openTab(event, 'certificates')">Certificates</button>
+                </div>
+            </div>
+
+            <div class="resume-right glass-display">
+                <div id="education" class="tab-content active">
+                    <h3 class="tab-title">My Education</h3>
+                    <div class="resume-grid">
+                        <div class="info-card">
+                            <span class="year-badge">2023 - Present</span>
+                            <h4>BSc (Hons) in Software Engineering</h4>
+                            <p class="institution"><i class="fas fa-university"></i> Cardiff Metropolitan University</p>
+                        </div>
+                        <div class="info-card">
+                            <span class="year-badge">2021 - 2022</span>
+                            <h4>Diploma in IT</h4>
+                            <p class="institution"><i class="fas fa-university"></i> ESOFT Metro Campus</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="skills" class="tab-content">
+                    <h3 class="tab-title">Professional Skills</h3>
+                    <div class="skills-flex">
+                        <div class="skill-item html-skill">
+                            <i class="fab fa-html5"></i> <span>HTML5</span>
+                        </div>
+                        <div class="skill-item css-skill">
+                            <i class="fab fa-css3-alt"></i> <span>CSS3</span>
+                        </div>
+                        <div class="skill-item js-skill">
+                            <i class="fab fa-js"></i> <span>JavaScript</span>
+                        </div>
+                        <div class="skill-item react-skill">
+                            <i class="fab fa-react"></i> <span>React</span>
+                        </div>
+                        <div class="skill-item java-skill">
+                            <i class="fab fa-java"></i> <span>Java</span>
+                        </div>
+                        <div class="skill-item node-skill">
+                            <i class="fab fa-node-js"></i> <span>Node.js</span>
+                        </div>
+                        <div class="skill-item figma-skill">
+                            <i class="fab fa-figma"></i> <span>UI/UX</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="certificates" class="tab-content">
+                    <h3 class="tab-title">Certifications</h3>
+                    <div class="resume-grid">
+                        <div class="info-card">
+                            <span class="year-badge">2024</span>
+                            <h4>Responsive Web Design</h4>
+                            <p class="institution">FreeCodeCamp</p>
+                        </div>
+                        <div class="info-card">
+                            <span class="year-badge">2023</span>
+                            <h4>Java Foundation</h4>
+                            <p class="institution">Oracle Academy</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="work" class="work-section">
+    <div class="container">
+        <h2 class="section-title">My Projects</h2>
+        <div class="projects-grid">
+            
+            <div class="project-card glass-card">
+                <div class="project-img-box">
+                    <img src="assets/project1.jpg" alt="Project 1">
+                    <div class="project-overlay">
+                        <a href="#" class="view-btn"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <span class="project-category">Web Development</span>
+                    <h3>E-Commerce Platform</h3>
+                    <p>A fully functional online store with payment integration and admin dashboard.</p>
+                    <div class="project-tags">
+                        <span>React</span>
+                        <span>Node.js</span>
+                        <span>MongoDB</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card glass-card">
+                <div class="project-img-box">
+                    <img src="assets/project2.jpg" alt="Project 2">
+                    <div class="project-overlay">
+                        <a href="#" class="view-btn"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <span class="project-category">UI/UX Design</span>
+                    <h3>Travel App UI</h3>
+                    <p>Modern and sleek mobile application design for travel enthusiasts and explorers.</p>
+                    <div class="project-tags">
+                        <span>Figma</span>
+                        <span>Adobe XD</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card glass-card">
+                <div class="project-img-box">
+                    <img src="assets/project3.jpg" alt="Project 3">
+                    <div class="project-overlay">
+                        <a href="#" class="view-btn"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <span class="project-category">Software</span>
+                    <h3>Task Management System</h3>
+                    <p>An internal tool for teams to manage tasks, deadlines and real-time collaboration.</p>
+                    <div class="project-tags">
+                        <span>Java</span>
+                        <span>MySQL</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+    <canvas id="atoms-canvas"></canvas>
+    <div class="canvas-overlay"></div>
+
+<div id="intro">
+ <div class="name-wrapper">
+        <div class="letters" style="display:flex;">
+            <span class="letter">N</span><span class="letter">I</span><span class="letter">M</span>
+            <span class="letter">E</span><span class="letter">S</span><span class="letter">H</span>
+        </div>
+        <div class="underline"></div>
+    </div>
+</div>
+
+
+<script src="script.js"></script>
+</body>
+</html>
