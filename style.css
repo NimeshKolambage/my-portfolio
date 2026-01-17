@@ -1121,3 +1121,159 @@ nav {
     color: #fff;
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
+/* Responsive */
+/* Hire Me Modal Main Container */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal.active {
+    display: flex !important;
+}
+
+/* Modal Content Layout */
+.modal-content {
+    background: #1c1c21;
+    width: 100%;
+    max-width: 1100px;
+    border-radius: 20px;
+    padding: 50px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
+}
+
+@media (max-width: 992px) {
+    .modal-content {
+        flex-direction: column;
+        padding: 30px;
+        gap: 40px;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+}
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    top: 25px;
+    right: 30px;
+    font-size: 35px;
+    color: var(--accent-color);
+    cursor: pointer;
+    z-index: 10;
+}
+
+/* Left Side - Form */
+.form-side {
+    flex: 1.2;
+}
+
+.form-side h2 {
+    color: var(--accent-color);
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.form-side p {
+    color: #b0b0b0;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.form-side input, .form-side select, .form-side textarea {
+    width: 100%;
+    background: #111114;
+    border: 1px solid #2a2a2e;
+    padding: 15px;
+    color: #fff;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.form-side input:focus, .form-side textarea:focus {
+    border-color: var(--accent-color);
+}
+
+.form-side textarea {
+    height: 150px;
+    resize: none;
+}
+
+.send-btn {
+    background: var(--accent-color);
+    color: #000;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+.send-btn:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 153, 0.4);
+    transform: scale(1.02);
+}
+
+/* Right Side - Info Cards */
+.my-details {
+    flex: 0.8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 25px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.info-icon {
+    width: 60px;
+    height: 60px;
+    background: #27272c;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--accent-color);
+    font-size: 1.5rem;
+}
+
+.info-text span {
+    display: block;
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 3px;
+}
+
+.info-text p {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 500;
+}

@@ -41,9 +41,60 @@
             type();
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            initCyclingTyping();
+    emailjs.init("xybJ_i1qV33sbYDA7");
+    document.addEventListener('DOMContentLoaded', () => {
+    initCyclingTyping(); // Typing animation එක
+
+    const hireModal = document.getElementById("hire-modal");
+    const hireBtn = document.querySelector(".hire-btn");
+    const closeBtn = document.querySelector(".close-btn");
+    const contactForm = document.getElementById("contact-form");
+
+    // --- Hire Me Modal එක පාලනය කිරීම ---
+    if (hireBtn) {
+        hireBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            hireModal.classList.add("active");
+            document.body.style.overflow = "hidden";
         });
+    }
+
+    if (closeBtn) {
+        closeBtn.onclick = () => {
+            hireModal.classList.remove("active");
+            document.body.style.overflow = "auto";
+        };
+    }
+
+    // --- EmailJS හරහා Form එක Submit කිරීම ---
+    if (contactForm) {
+        contactForm.addEventListener("submit", function(event) {
+            event.preventDefault(); // Page එක refresh වීම නවත්වයි
+
+            const btn = this.querySelector(".send-btn");
+            const originalText = btn.innerText;
+            btn.innerText = "Sending..."; // Button එකේ text එක වෙනස් කරයි
+
+            // EmailJS Service ID, Template ID මෙතනට දාන්න
+            emailjs.sendForm('service_oe9nicr', 'template_zhbpxrv', this)
+                .then(() => {
+                    btn.innerText = "Message Sent!";
+                    alert("ස්තූතියි! ඔබේ පණිවිඩය සාර්ථකව ලැබුණා.");
+                    contactForm.reset(); // Form එක හිස් කරයි
+                    
+                    setTimeout(() => { 
+                        hireModal.classList.remove("active");
+                        document.body.style.overflow = "auto";
+                        btn.innerText = originalText;
+                    }, 2000);
+                }, (error) => {
+                    btn.innerText = "Error!";
+                    alert("සමාවන්න, පණිවිඩය යැවීමට නොහැකි වුණා: " + JSON.stringify(error));
+                    btn.innerText = originalText;
+                });
+        });
+    }
+});
 
         // Canvas setup for atoms animation
         const canvas = document.getElementById('atoms-canvas');
@@ -260,3 +311,4 @@ function openTab(evt, tabName) {
     activeTab.classList.add("active");
     evt.currentTarget.classList.add("active");
 }
+
