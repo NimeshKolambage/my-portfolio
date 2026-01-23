@@ -43,6 +43,17 @@ emailjs.init("xybJ_i1qV33sbYDA7");
 document.addEventListener('DOMContentLoaded', () => {
 initCyclingTyping(); // Typing animation එක
 
+// Navbar active link management
+const navLinks = document.querySelectorAll('.nav-links a');
+navLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+        // Remove active class from all links
+        navLinks.forEach(l => l.classList.remove('active'));
+        // Add active class to clicked link
+        this.classList.add('active');
+    });
+});
+
 // CV Download Button Animation
 const cvDownloadBtn = document.querySelector('.cv-download');
 if (cvDownloadBtn) {
