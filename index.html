@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
     <title>Nivi</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -38,8 +37,8 @@
                       DOWNLOAD CV <i class="fas fa-download"></i>
                    </a>
                     <div class="social-icons">
-                        <a href="#"><i class="fab fa-github"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com/NimeshKolambage"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/nimesh-kolambage-595454346"><i class="fab fa-linkedin-in"></i></a>
                         <a href="#"><i class="fab fa-youtube"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
                     </div>
@@ -149,12 +148,12 @@
                         <div class="info-card">
                             <span class="year-badge">2023 - Present</span>
                             <h4>BSc (Hons) in Software Engineering</h4>
-                            <p class="institution"><i class="fas fa-university"></i> Cardiff Metropolitan University</p>
+                            <p class="institution"><i class="fas fa-university"></i>National Institute of Business Management (NIBM)</p>
                         </div>
                         <div class="info-card">
                             <span class="year-badge">2021 - 2022</span>
                             <h4>Diploma in IT</h4>
-                            <p class="institution"><i class="fas fa-university"></i> ESOFT Metro Campus</p>
+                            <p class="institution"><i class="fas fa-university"></i>National Institute of Business Management (NIBM)</p>
                         </div>
                     </div>
                 </div>
@@ -190,14 +189,14 @@
                     <h3 class="tab-title">Certifications</h3>
                     <div class="resume-grid">
                         <div class="info-card">
-                            <span class="year-badge">2024</span>
-                            <h4>Responsive Web Design</h4>
-                            <p class="institution">FreeCodeCamp</p>
+                            <span class="year-badge"></span>
+                            <h4></h4>
+                            <p class="institution"></p>
                         </div>
                         <div class="info-card">
-                            <span class="year-badge">2023</span>
-                            <h4>Java Foundation</h4>
-                            <p class="institution">Oracle Academy</p>
+                            <span class="year-badge"></span>
+                            <h4></h4>
+                            <p class="institution"></p>
                         </div>
                     </div>
                 </div>
@@ -279,24 +278,43 @@
             
             <form id="contact-form">
                 <div class="input-row">
-                    <input type="text" name="from_name" placeholder="Firstname" required>
-                    <input type="text" name="last_name" placeholder="Lastname">
+                    <div class="form-group">
+                        <input type="text" name="from_name" placeholder="Firstname" required>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="last_name" placeholder="Lastname">
+                    </div>
                 </div>
                 <div class="input-row">
-                    <input type="email" name="user_email" placeholder="Email address" required>
-                    <input type="text" name="user_phone" placeholder="Phone number">
+                    <div class="form-group">
+                        <input type="email" name="user_email" placeholder="Email address" required>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="user_phone" placeholder="Phone number">
+                    </div>
                 </div>
                 
-                <select name="service_type">
-                    <option value="" disabled selected>Select a service</option>
-                    <option value="Web Development">Web Development</option>
-                    <option value="UI/UX Design">UI/UX Design</option>
-                    <option value="App Development">App Development</option>
-                </select>
+                <div class="form-group">
+                    <select name="service_type" required>
+                        <option value="" disabled selected>Select a service</option>
+                        <option value="Web Development">Web Development</option>
+                        <option value="UI/UX Design">UI/UX Design</option>
+                        <option value="App Development">App Development</option>
+                    </select>
+                    <span class="error-message"></span>
+                </div>
 
-                <textarea name="message" placeholder="Type your message here..." required></textarea>
+                <div class="form-group">
+                    <textarea name="message" placeholder="Type your message here..." required></textarea>
+                    <span class="error-message"></span>
+                </div>
                 
-                <button type="submit" class="send-btn">Send message</button>
+                <button type="submit" class="send-btn">
+                    <span class="btn-text">Send message</span>
+                    <span class="btn-spinner"></span>
+                </button>
             </form>
         </div>
 
@@ -305,7 +323,7 @@
                 <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
                 <div class="info-text">
                     <span>Phone</span>
-                    <p>+94 7X XXX XXXX</p>
+                    <p>+94 77 690 2562</p>
                 </div>
             </div>
 
@@ -313,7 +331,7 @@
                 <div class="info-icon"><i class="fas fa-envelope"></i></div>
                 <div class="info-text">
                     <span>Email</span>
-                    <p>nimesh@example.com</p>
+                    <p>nimeshkolambage@gmail.com</p>
                 </div>
             </div>
 
@@ -321,10 +339,19 @@
                 <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
                 <div class="info-text">
                     <span>Address</span>
-                    <p>Colombo, Sri Lanka</p>
+                    <p>Uragasmanhandiya, Sri Lanka</p>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- Success Notification Modal -->
+<div id="success-modal" class="success-modal">
+    <div class="success-content">
+        <div class="success-icon">✓</div>
+        <h3>Message Sent!</h3>
+        <p>Thank you for reaching out. I'll get back to you as soon as possible.</p>
     </div>
 </div>
 
