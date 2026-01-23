@@ -43,13 +43,62 @@ emailjs.init("xybJ_i1qV33sbYDA7");
 document.addEventListener('DOMContentLoaded', () => {
 initCyclingTyping(); // Typing animation එක
 
-// Navbar active link management
+// Navbar active link management with scroll detection
 const navLinks = document.querySelectorAll('.nav-links a');
+const sections = document.querySelectorAll('section');
+
+function updateActiveNavLink() {
+    let currentSection = '';
+    
+    // Check which section is in viewport
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        
+        if (window.scrollY >= sectionTop - 150) {
+            currentSection = section.getAttribute('id');
+        }
+    });
+    
+    // Update active link based on current section
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        
+        // Get the href value
+        const href = link.getAttribute('href');
+        
+        // Match the link with current section
+        if (href === '#' && window.scrollY < 150) {
+            link.classList.add('active');
+        } else if (href.substring(1) === currentSection) {
+            link.classList.add('active');
+        }
+    });
+}
+
+// Update on scroll
+window.addEventListener('scroll', updateActiveNavLink);
+
+// Click handler for manual navigation
 navLinks.forEach(link => {
     link.addEventListener('click', function(e) {
-        // Remove active class from all links
+        e.preventDefault();
+        
+        const href = this.getAttribute('href');
+        
+        // Handle home link
+        if (href === '#') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+            // Scroll to section
+            const targetSection = document.querySelector(href);
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        
+        // Update active link immediately
         navLinks.forEach(l => l.classList.remove('active'));
-        // Add active class to clicked link
         this.classList.add('active');
     });
 });
