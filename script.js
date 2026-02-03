@@ -556,38 +556,40 @@ const overlay = document.getElementById('intro-overlay');
 const content = document.getElementById('site-content');
 const typingSpeed = 500; 
 
-nameStr.split('').forEach((char, i) => {
-    const span = document.createElement('span');
-    span.innerText = char;
-    span.className = 'letter';
-    lettersBox.appendChild(span);
+if (lettersBox && line && wrapper && overlay) {
+    nameStr.split('').forEach((char, i) => {
+        const span = document.createElement('span');
+        span.innerText = char;
+        span.className = 'letter';
+        lettersBox.appendChild(span);
 
-    setTimeout(() => {
-        span.style.opacity = '1';
-        span.style.transform = 'translateY(0)';
-        let progress = ((i + 1) / nameStr.length) * 100;
-        line.style.width = progress + "%";
-    }, i * typingSpeed);
-});
-
-setTimeout(() => {
-    overlay.style.backgroundColor = "transparent";
-    const rect = wrapper.getBoundingClientRect();
-    wrapper.style.position = 'fixed';
-    wrapper.style.left = rect.left + 'px';
-    wrapper.style.top = rect.top + 'px';
-
-    setTimeout(() => {
-        wrapper.classList.add('move-to-logo');
-        
         setTimeout(() => {
-            content.classList.add('show-site');
-            overlay.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }, 1000);
-    }, 100);
+            span.style.opacity = '1';
+            span.style.transform = 'translateY(0)';
+            let progress = ((i + 1) / nameStr.length) * 100;
+            line.style.width = progress + "%";
+        }, i * typingSpeed);
+    });
 
-}, (nameStr.length * typingSpeed) + 1000);
+    setTimeout(() => {
+        overlay.style.backgroundColor = "transparent";
+        const rect = wrapper.getBoundingClientRect();
+        wrapper.style.position = 'fixed';
+        wrapper.style.left = rect.left + 'px';
+        wrapper.style.top = rect.top + 'px';
+
+        setTimeout(() => {
+            wrapper.classList.add('move-to-logo');
+            
+            setTimeout(() => {
+                content.classList.add('show-site');
+                overlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }, 1000);
+        }, 100);
+
+    }, (nameStr.length * typingSpeed) + 1000);
+}
 
 
 function openTab(evt, tabName) {

@@ -125,7 +125,7 @@ nav {
     align-items: center;
     justify-content: space-between;
     padding: 50px 10%;
-    min-height: 80vh;
+    min-height: 8vh;
 }
 
 .hero-content {
@@ -185,7 +185,7 @@ nav {
 }
 
 .main-profile-img {
-    width: 380px;
+    width: 370px;
     z-index: 2;
     position: relative;
     /* Optional: if you want the circular shape like the image */
@@ -304,7 +304,7 @@ nav {
 }
 
 .hero-content h1 {
-    font-size: 60px;
+    font-size: 52px;
     margin: 20px 0;
     line-height: 1.1;
     font-family: 'JetBrains Mono', monospace;
@@ -538,7 +538,7 @@ nav {
 
     .letter {
         color: #ffffff;
-        font-size: clamp(2.5rem, 8vw, 5rem);
+        font-size: clamp(2rem, 7vw, 4rem);
         font-weight: 900;
         opacity: 0;
         transform: translateY(30px) rotateX(90deg);
@@ -719,7 +719,7 @@ nav {
         }
 
         .content h1 {
-            font-size: 4rem;
+            font-size: 3.2rem;
             font-weight: 800;
             line-height: 1.1;
             margin-bottom: 1.5rem;
@@ -1051,7 +1051,7 @@ nav {
 
 /* Section Title */
 .about-section .section-title {
-    font-size: 3.5rem;
+    font-size: 3.1rem;
     margin-bottom: 40px;
     text-align: left;
     color: #fff;
@@ -1082,7 +1082,7 @@ nav {
 }
 
 .resume-title {
-    font-size: 3rem;
+     font-size: 3.1rem;
     font-weight: 800;
     color: #fff;
     margin-bottom: 20px;
@@ -1126,7 +1126,7 @@ nav {
 }
 
 .tab-title {
-    font-size: 2.2rem;
+    font-size: 1.9rem;
     color: var(--accent-color);
     margin-bottom: 30px;
 }
@@ -1228,7 +1228,7 @@ nav {
 }
 
 .work-section .section-title {
-    font-size: 3.3rem;
+     font-size: 3.1rem;
      margin-bottom: 40px;
     text-align: left;
     color: #fff;
@@ -1424,7 +1424,7 @@ nav {
     position: absolute;
     top: 25px;
     right: 30px;
-    font-size: 35px;
+    font-size: 30px;
     color: var(--accent-color);
     cursor: pointer;
     z-index: 10;
@@ -1680,7 +1680,7 @@ body.blur-bg #success-modal {
 }
 
 .success-icon {
-    font-size: 5rem;
+    font-size: 4rem;
     color: var(--accent-color);
     margin-bottom: 20px;
     animation: iconBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -1736,7 +1736,7 @@ body.blur-bg #success-modal {
     justify-content: center;
     align-items: center;
     color: var(--accent-color);
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 .info-text span {
@@ -1916,4 +1916,144 @@ body.blur-bg #success-modal {
         font-size: 0.7rem;
         padding: 4px 10px;
     }
+}
+/* ============================
+   MOBILE ONLY — HERO FIX PACK
+   (desktop untouched)
+   ============================ */
+@media (max-width: 600px) {
+
+  /* Header spacing + logo + Hire button */
+  header{
+    padding: 16px 6% !important;
+  }
+  .logo{
+    font-size: 18px !important;   /* smaller on mobile */
+    letter-spacing: 1px !important;
+  }
+  .hire-btn{
+    padding: 8px 14px !important;
+    font-size: 12px !important;
+    border-radius: 18px !important;
+  }
+
+  /* HERO: push down + full height so it doesn't crop */
+  .hero{
+    min-height: 100vh !important;
+    padding: 0 6% !important;
+    padding-top: 110px !important;  /* pushes the "Hello" section down */
+    gap: 22px !important;
+  }
+
+  /* Make hero content take full width and center */
+  .hero-content{
+    width: 100% !important;
+    max-width: 100% !important;
+    text-align: center !important;
+  }
+
+  /* "Hello I'm" title + Name wrap */
+  .hero-content h1{
+    font-size: 32px !important;
+    line-height: 1.15 !important;
+    margin: 14px 0 !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+  }
+  .hero-content h1 span{
+    display: inline-block !important; /* allow wrap but keep style */
+    font-size: 34px !important;
+    white-space: normal !important;
+  }
+
+  /* Role typing text — stop overflow on mobile */
+  .role{
+    font-size: 14px !important;
+    letter-spacing: 1px !important;
+    white-space: normal !important;
+    border-right: 0 !important;      /* remove cursor line if it breaks */
+    animation: none !important;       /* keeps it clean on small screens */
+    height: auto !important;
+  }
+
+  /* Paragraph */
+  .hero-content p{
+    font-size: 13px !important;
+    line-height: 1.6 !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 6px !important;
+  }
+
+  /* Buttons row wrap */
+  .hero-btns{
+    justify-content: center !important;
+    gap: 14px !important;
+    flex-wrap: wrap !important;
+    margin-top: 22px !important;
+  }
+  .cv-download{
+    padding: 10px 16px !important;
+    font-size: 13px !important;
+  }
+
+  /* Profile image container — reduce size on mobile */
+  .hero-image-container{
+    height: auto !important;
+    margin-top: 0 !important;
+  }
+  .profile-wrapper{
+    width: 220px !important;
+    height: 220px !important;
+  }
+
+  /* ICONS around profile — bring closer */
+  .floating-card{
+    transform: scale(0.75) !important;
+  }
+
+  /* These 2 are the ones you mentioned (js + node) */
+  .js-card{
+    top: 8% !important;
+    right: 6% !important;
+  }
+  .node-card{
+    bottom: 6% !important;
+    left: 50% !important;
+    transform: translateX(-50%) scale(0.75) !important;
+  }
+
+  /* (Optional) Bring the other cards closer too */
+  .projects-card{ top: 18% !important; left: 4% !important; }
+  .rating-card{ top: 26% !important; right: 2% !important; }
+  .tech-card{ bottom: 18% !important; right: 8% !important; }
+
+  /* Social icons under hero content — don't overlap */
+  .social-icons{
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+  }
+}
+
+
+/* EXTRA SMALL PHONES */
+@media (max-width: 480px) {
+
+  .hero{ padding-top: 120px !important; }
+
+  .hero-content h1{
+    font-size: 28px !important;
+  }
+  .hero-content h1 span{
+    font-size: 30px !important;
+  }
+
+  .profile-wrapper{
+    width: 200px !important;
+    height: 200px !important;
+  }
+
+  .floating-card{
+    transform: scale(0.70) !important;
+  }
 }
