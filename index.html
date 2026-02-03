@@ -217,62 +217,79 @@
 <section id="work" class="work-section">
     <div class="container">
         <h2 class="section-title">My Projects</h2>
-        <div class="projects-grid">
-            
-            <div class="project-card glass-card">
-                <div class="project-img-box">
-                    <img src="assets/logoname.png" alt="Project 1">
-                    <div class="project-overlay">
-                        <a href="https://github.com/NimeshKolambage/Aura_Banking_Application" class="view-btn"><i class="fas fa-external-link-alt"></i></a>
+        
+        <!-- Project Slider Container -->
+        <div class="slider-container">
+            <button class="slider-nav slider-prev" id="sliderPrev" aria-label="Previous projects">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+
+            <div class="slider-wrapper">
+                <div class="projects-slider" id="projectsSlider">
+                    
+                    <div class="project-card glass-card">
+                        <div class="project-img-box">
+                            <img src="assets/logoname.png" alt="Banking Application">
+                            <div class="project-overlay">
+                                <a href="https://github.com/NimeshKolambage/Aura_Banking_Application" class="view-btn"><i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <span class="project-category">Web Development</span>
+                            <h3>Banking Application</h3>
+                            <p>A fully functional online Banking application with payment integration and admin dashboard.</p>
+                            <div class="project-tags">
+                                <span>HTML</span>
+                                <span>CSS</span>
+                                <span>JavaScript</span>
+                                <span>MongoDB</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="project-info">
-                    <span class="project-category">Web Development</span>
-                    <h3>E-Commerce Platform</h3>
-                    <p>A fully functional online store with payment integration and admin dashboard.</p>
-                    <div class="project-tags">
-                        <span>HTML</span>
-                        <span>CSS</span>
-                        <span>MongoDB</span>
+
+                    <div class="project-card glass-card">
+                        <div class="project-img-box">
+                            <img src="assets/SmartResume Centered Logo on White Background.jpg" alt="SmartResume">
+                            <div class="project-overlay">
+                                <a href="https://github.com/NimeshKolambage/SmartResume.git" class="view-btn"><i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <span class="project-category">Web Development</span>
+                            <h3>SmartResume</h3>
+                            <p>Web-based CV generator that allows users to create professional resumes using customizable templates, live preview, and one-click PDF download.</p>
+                            <div class="project-tags">
+                                <span>HTML</span>
+                                <span>CSS</span>
+                                <span>JavaScript</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="project-card glass-card">
-                <div class="project-img-box">
-                    <img src="assets/project2.jpg" alt="Project 2">
-                    <div class="project-overlay">
-                        <a href="#" class="view-btn"><i class="fas fa-external-link-alt"></i></a>
+
+                    <div class="project-card glass-card">
+                        <div class="project-img-box">
+                            <img src="assets/Futuristic WearMe Banner with Neural Networks.jpg" alt="WearMe">
+                            <div class="project-overlay">
+                                <a href="https://github.com/NimeshKolambage/Outfit_Prediction_System.git" class="view-btn"><i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <span class="project-category">Web Development</span>
+                            <h3>WearMe</h3>
+                            <p>Machine learning model to predict output values based on historical input data. The system analyzes patterns using supervised learning techniques.</p>
+                            <div class="project-tags">
+                                <span>Machine Learning</span>
+                                <span>Python</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="project-info">
-                    <span class="project-category">UI/UX Design</span>
-                    <h3>Travel App UI</h3>
-                    <p>Modern and sleek mobile application design for travel enthusiasts and explorers.</p>
-                    <div class="project-tags">
-                        <span>Figma</span>
-                        <span>Adobe XD</span>
-                    </div>
+
                 </div>
             </div>
 
-            <div class="project-card glass-card">
-                <div class="project-img-box">
-                    <img src="assets/project3.jpg" alt="Project 3">
-                    <div class="project-overlay">
-                        <a href="#" class="view-btn"><i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                </div>
-                <div class="project-info">
-                    <span class="project-category">Software</span>
-                    <h3>Task Management System</h3>
-                    <p>An internal tool for teams to manage tasks, deadlines and real-time collaboration.</p>
-                    <div class="project-tags">
-                        <span>Java</span>
-                        <span>MySQL</span>
-                    </div>
-                </div>
-            </div>
-
+            <button class="slider-nav slider-next" id="sliderNext" aria-label="Next projects">
+                <i class="fas fa-chevron-right"></i>
+            </button>
         </div>
     </div>
 </section>

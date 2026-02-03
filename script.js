@@ -40,8 +40,117 @@ function initCyclingTyping() {
 }
 
 emailjs.init("xybJ_i1qV33sbYDA7");
+
+// ===== PROJECT SLIDER FUNCTIONALITY =====
+function initProjectSlider() {
+    const slider = document.getElementById('projectsSlider');
+    const prevBtn = document.getElementById('sliderPrev');
+    const nextBtn = document.getElementById('sliderNext');
+    
+    if (!slider || !prevBtn || !nextBtn) return;
+
+    const cards = slider.querySelectorAll('.project-card');
+    const totalCards = cards.length;
+    let cardsPerView = 3; // Desktop
+    let currentIndex = 0;
+
+    // Determine cards per view based on screen size
+    function updateCardsPerView() {
+        const width = window.innerWidth;
+        if (width <= 768) {
+            cardsPerView = 1;
+        } else if (width <= 1024) {
+            cardsPerView = 2;
+        } else {
+            cardsPerView = 3;
+        }
+    }
+
+    // Calculate max index (groups of cards)
+    function getMaxIndex() {
+        const totalGroups = Math.ceil(totalCards / cardsPerView);
+        return Math.max(0, totalGroups - 1);
+    }
+
+    // Update slider position
+    function updateSlider() {
+        const offset = -currentIndex * 100;
+        slider.style.transform = `translateX(${offset}%)`;
+        
+        // Update button states
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex >= getMaxIndex();
+    }
+
+    // Next slide group
+    function nextSlide() {
+        if (currentIndex < getMaxIndex()) {
+            currentIndex++;
+            updateSlider();
+        }
+    }
+
+    // Previous slide group
+    function prevSlide() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateSlider();
+        }
+    }
+
+    // Event listeners
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') nextSlide();
+        if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+    // Touch support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    slider.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].clientX;
+    });
+
+    slider.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].clientX;
+        handleSwipe();
+    });
+
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                nextSlide(); // Swiped left
+            } else {
+                prevSlide(); // Swiped right
+            }
+        }
+    }
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        updateCardsPerView();
+        if (currentIndex > getMaxIndex()) {
+            currentIndex = getMaxIndex();
+        }
+        updateSlider();
+    });
+
+    // Initialize
+    updateCardsPerView();
+    updateSlider();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 initCyclingTyping(); // Typing animation එක
+initProjectSlider(); // Initialize project slider
 
 // Navbar active link management with scroll detection
 const navLinks = document.querySelectorAll('.nav-links a');
