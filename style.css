@@ -502,46 +502,162 @@ nav {
 }
         #intro {
         position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-        background-color: #E5E5E0; display: flex; justify-content: center; 
-        align-items: center; z-index: 1000;
-        animation: fadeOutOverlay 1s forwards 4.5s;
+        background: linear-gradient(135deg, #1a1a1a 0%, #0f0f15 100%);
+        display: flex; justify-content: center; align-items: center;
+        z-index: 1000;
+        animation: fadeOutOverlay 1s ease-out forwards 6.3s;
+    }
+
+    .intro-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        perspective: 1000px;
     }
 
     .name-wrapper {
-        position: relative; display: flex; flex-direction: column;
-        animation: moveToLogo 1.2s cubic-bezier(0.7, 0, 0.3, 1) forwards 3.5s;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        animation: moveToLogoTop 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards 4.6s;
+    }
+
+    .letters-container {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        flex-wrap: wrap;
+        animation: rotateAndFlip 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards 3s;
+        perspective: 1000px;
     }
 
     .letter {
-        color: #000; font-size: 5rem; font-weight: 900; opacity: 0;
-        transform: translateY(30px); animation: bounceLetter 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-        margin-right: 5px;
+        color: #ffffff;
+        font-size: clamp(2.5rem, 8vw, 5rem);
+        font-weight: 900;
+        opacity: 0;
+        transform: translateY(30px) rotateX(90deg);
+        animation: typewriteLetter 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards, 
+                   transformToNIVI 1.2s ease-in-out 3s forwards;
+        letter-spacing: 2px;
+        font-family: 'JetBrains Mono', monospace;
     }
 
-    .letter:nth-child(1) { animation-delay: 0.5s; }
-    .letter:nth-child(2) { animation-delay: 1.0s; }
-    .letter:nth-child(3) { animation-delay: 1.5s; }
-    .letter:nth-child(4) { animation-delay: 2.0s; }
-    .letter:nth-child(5) { animation-delay: 2.5s; }
-    .letter:nth-child(6) { animation-delay: 3.0s; }
+    .letter:nth-child(1) { animation-delay: 0.2s, 3s; }
+    .letter:nth-child(2) { animation-delay: 0.4s, 3s; }
+    .letter:nth-child(3) { animation-delay: 0.6s, 3s; }
+    .letter:nth-child(4) { animation-delay: 0.8s, 3s; }
+    .letter:nth-child(5) { animation-delay: 1s, 3s; }
+    .letter:nth-child(6) { animation-delay: 1.2s, 3s; }
 
     .underline {
-        width: 0%; height: 6px; background-color: #000; margin-top: 10px;
-        animation: fillLine 3s linear forwards 0.5s;
+        width: 0%;
+        height: 4px;
+        background: linear-gradient(90deg, #ffffff, #b0b0b0);
+        margin-top: 15px;
+        border-radius: 2px;
+        animation: fillUnderline 0.8s ease-out forwards 2.6s;
     }
 
-    @keyframes bounceLetter { to { opacity: 1; transform: translateY(0); } }
-    @keyframes fillLine { to { width: 100%; } }
-    @keyframes moveToLogo {
-        to { transform: scale(0.25) translate(-140%, -150%); position: fixed; top: 30px; left: 30px; }
+    /* ===== KEYFRAME ANIMATIONS ===== */
+
+    @keyframes typewriteLetter {
+        0% {
+            opacity: 0;
+            transform: translateY(30px) rotateX(90deg);
+        }
+        70% {
+            opacity: 1;
+            transform: translateY(-10px) rotateX(0deg);
+        }
+        85% {
+            transform: translateY(5px) rotateX(0deg);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0) rotateX(0deg);
+        }
     }
-    @keyframes fadeOutOverlay { to { opacity: 0; visibility: hidden; } }
+
+    @keyframes transformToNIVI {
+        0% {
+            opacity: 1;
+            transform: scale(1) rotateY(0deg);
+        }
+        50% {
+            opacity: 0.7;
+            transform: scale(0.95) rotateY(180deg);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1) rotateY(360deg);
+        }
+    }
+
+    @keyframes fillUnderline {
+        0% {
+            width: 0%;
+            transform: scaleX(0);
+        }
+        100% {
+            width: 100%;
+            transform: scaleX(1);
+        }
+    }
+
+    @keyframes rotateAndFlip {
+        0% {
+            opacity: 1;
+            transform: rotateZ(0deg) rotateY(0deg);
+        }
+        50% {
+            transform: rotateZ(5deg) rotateY(180deg) scale(0.98);
+        }
+        100% {
+            opacity: 1;
+            transform: rotateZ(0deg) rotateY(360deg) scale(1);
+        }
+    }
+
+    @keyframes moveToLogoTop {
+        0% {
+            opacity: 1;
+            transform: translate(0, 0) scale(1);
+        }
+        70% {
+            opacity: 1;
+            transform: translate(0, -20px) scale(1);
+        }
+        100% {
+            opacity: 0;
+            transform: translate(-200vw, -200vh) scale(0.2);
+        }
+    }
+
+    @keyframes fadeOutOverlay {
+        0% {
+            opacity: 1;
+            visibility: visible;
+        }
+        100% {
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+
+    @keyframes showContent {
+        to { opacity: 1; }
+    }
 
     .content {
         padding: 150px 20px; text-align: center; color: #000; opacity: 0;
-        animation: showContent 1s forwards 4.8s;
+        animation: showContent 1s forwards 6.6s;
     }
-    @keyframes showContent { to { opacity: 1; } }
 
         /* Canvas for atoms animation */
         #atoms-canvas {

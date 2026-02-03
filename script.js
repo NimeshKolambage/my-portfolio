@@ -1,3 +1,31 @@
+// ===== INTRO ANIMATION - NIMESH to NIVI Transformation =====
+function initIntroAnimation() {
+    const lettersContainer = document.getElementById('lettersContainer');
+    const introSection = document.getElementById('intro');
+    
+    if (!lettersContainer) return;
+
+    // Transform letters after typing animation completes (3s)
+    setTimeout(() => {
+        const letters = lettersContainer.querySelectorAll('.letter');
+        const textSequence = ['N', 'I', 'V', 'I'];
+        
+        // Transform NIMESH (6 letters) to NIVI (4 letters)
+        letters.forEach((letter, index) => {
+            if (index < textSequence.length) {
+                letter.textContent = textSequence[index];
+            } else {
+                letter.style.display = 'none';
+            }
+        });
+    }, 3000);
+
+    // Hide intro after complete animation
+    setTimeout(() => {
+        introSection.style.pointerEvents = 'none';
+    }, 6300);
+}
+
 // Cycling typing animation for roles
 function initCyclingTyping() {
     const roleSpan = document.querySelector('.role');
@@ -149,6 +177,7 @@ function initProjectSlider() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+initIntroAnimation(); // NIMESH to NIVI intro animation
 initCyclingTyping(); // Typing animation එක
 initProjectSlider(); // Initialize project slider
 
