@@ -2057,3 +2057,49 @@ body.blur-bg #success-modal {
     transform: scale(0.70) !important;
   }
 }
+
+/* Footer Styling */
+.footer {
+    background:transparent;
+    padding: 40px 10%;
+    margin-top: -60px;
+    position: relative;
+    z-index: 10;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.footer-content p {
+    color: var(--text-gray);
+    font-size: 0.95rem;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+/* Footer Responsive */
+@media (max-width: 768px) {
+    .footer {
+        padding: 30px 5%;
+        margin-top: 40px;
+    }
+
+    .footer-content p {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer {
+        padding: 20px 5%;
+        margin-top: 30px;
+    }
+
+    .footer-content p {
+        font-size: 0.8rem;
+    }
+}
