@@ -3,13 +3,14 @@
     --accent-color: #00ff99;
     --text-white: #ffffff;
     --text-gray: #b0b0b0;
+    --neon-green: #00ff99;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
+    font-family: 'JetBrains Mono', monospace;
 }
 
 body {
@@ -45,6 +46,8 @@ header {
 .logo {
     font-size: 28px;
     font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 2px;
 }
 
 .logo span {
@@ -126,7 +129,8 @@ nav {
 }
 
 .role {
-    font-size: 18px;
+    font-size: 19px;
+    font-weight: bold;
     letter-spacing: 2px;
     display: inline-block;
     border-right: 2px solid var(--accent-color);
@@ -299,10 +303,16 @@ nav {
     font-size: 60px;
     margin: 20px 0;
     line-height: 1.1;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    color: var(--text-white);
+    letter-spacing: 1px;
 }
 
 .hero-content h1 span {
-    color: var(--accent-color);
+    color: var(--neon-green);
+    font-weight: 700;
+    display: inline;
 }
 
 .hero-content p {
