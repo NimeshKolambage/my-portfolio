@@ -1,16 +1,16 @@
-// ===== INTRO ANIMATION - NIMESH to NIVI Transformation =====
+
 function initIntroAnimation() {
     const lettersContainer = document.getElementById('lettersContainer');
     const introSection = document.getElementById('intro');
     
     if (!lettersContainer) return;
 
-    // Transform letters after typing animation completes (3s)
+   
     setTimeout(() => {
         const letters = lettersContainer.querySelectorAll('.letter');
         const textSequence = ['N', 'I', 'V', 'I'];
         
-        // Transform NIMESH (6 letters) to NIVI (4 letters)
+       
         letters.forEach((letter, index) => {
             if (index < textSequence.length) {
                 letter.textContent = textSequence[index];
@@ -20,13 +20,13 @@ function initIntroAnimation() {
         });
     }, 3000);
 
-    // Hide intro after complete animation
+   
     setTimeout(() => {
         introSection.style.pointerEvents = 'none';
     }, 6300);
 }
 
-// Cycling typing animation for roles
+
 function initCyclingTyping() {
     const roleSpan = document.querySelector('.role');
     if (!roleSpan) return;
@@ -43,21 +43,21 @@ function initCyclingTyping() {
         roleSpan.textContent = displayText;
 
         if (!isDeleting && currentTextIndex < currentRole.length) {
-            // Typing phase
+            
             currentTextIndex++;
             setTimeout(type, 200);
         } else if (isDeleting && currentTextIndex > 0) {
-            // Deleting phase
+          
             currentTextIndex--;
             setTimeout(type, 100);
         } else if (!isDeleting && currentTextIndex === currentRole.length) {
-            // Wait before deleting
+            
             setTimeout(() => {
                 isDeleting = true;
                 type();
             }, 2000);
         } else if (isDeleting && currentTextIndex === 0) {
-            // Move to next role
+            
             isDeleting = false;
             currentRoleIndex = (currentRoleIndex + 1) % roles.length;
             setTimeout(type, 500);
@@ -79,10 +79,10 @@ function initProjectSlider() {
 
     const cards = slider.querySelectorAll('.project-card');
     const totalCards = cards.length;
-    let cardsPerView = 3; // Desktop
+    let cardsPerView = 3; 
     let currentIndex = 0;
 
-    // Determine cards per view based on screen size
+    
     function updateCardsPerView() {
         const width = window.innerWidth;
         if (width <= 768) {
@@ -94,13 +94,13 @@ function initProjectSlider() {
         }
     }
 
-    // Calculate max index (groups of cards)
+  
     function getMaxIndex() {
         const totalGroups = Math.ceil(totalCards / cardsPerView);
         return Math.max(0, totalGroups - 1);
     }
 
-    // Update slider position
+   
     function updateSlider() {
         const offset = -currentIndex * 100;
         slider.style.transform = `translateX(${offset}%)`;
@@ -177,9 +177,9 @@ function initProjectSlider() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-initIntroAnimation(); // NIMESH to NIVI intro animation
-initCyclingTyping(); // Typing animation එක
-initProjectSlider(); // Initialize project slider
+initIntroAnimation(); 
+initCyclingTyping(); 
+initProjectSlider(); 
 
 // Navbar active link management with scroll detection
 const navLinks = document.querySelectorAll('.nav-links a');
@@ -343,7 +343,7 @@ if (closeBtn) {
     };
 }
 
-// --- EmailJS හරහා Form එක Submit කිරීම ---
+
 if (contactForm) {
     contactForm.addEventListener("submit", function(event) {
         event.preventDefault();
@@ -357,28 +357,28 @@ if (contactForm) {
         const btnText = btn.querySelector(".btn-text");
         const originalText = btnText.innerText;
         
-        // Show loading state
+      
         btn.classList.add("loading");
         btn.disabled = true;
 
-        // EmailJS Service ID, Template ID
+       
         emailjs.sendForm('service_oe9nicr', 'template_zhbpxrv', this)
             .then(() => {
-                // Hide loading state
+               
                 btn.classList.remove("loading");
                 btnText.innerText = "Message Sent!";
                 
-                // First, close the hire modal
+               
                 hireModal.classList.remove("active");
                 document.body.style.overflow = "auto";
                 
-                // Then show success modal
+                
                 successModal.classList.add("show");
                 
-                // Reset form
+               
                 contactForm.reset();
                 
-                // Hide success modal and reset button after 3 seconds
+             
                 setTimeout(() => {
                     successModal.classList.remove("show");
                     btnText.innerText = originalText;
@@ -389,7 +389,7 @@ if (contactForm) {
                 btnText.innerText = "Error!";
                 btn.disabled = false;
                 
-                // Show error message
+              
                 setTimeout(() => {
                     btnText.innerText = originalText;
                 }, 2000);
@@ -398,7 +398,7 @@ if (contactForm) {
 }
 });
 
-// Canvas setup for atoms animation
+
 const canvas = document.getElementById('atoms-canvas');
 const ctx = canvas.getContext('2d');
 
@@ -422,7 +422,6 @@ const colors = [
     '#6c63ff', '#ff6b9d', '#4dccff', '#6bffb8', '#ffcc4d'
 ];
 
-// Particle class
 class Particle {
     constructor() {
         this.x = Math.random() * canvas.width;
@@ -594,20 +593,20 @@ setTimeout(() => {
 function openTab(evt, tabName) {
     let i, tabcontent, tablinks;
     
-    // Hide all contents
+    
     tabcontent = document.getElementsByClassName("tab-content");
     for (i = 0; i < tabcontent.length; i++) {
         tabcontent[i].style.display = "none";
         tabcontent[i].classList.remove("active");
     }
 
-    // Deactivate all buttons
+
     tablinks = document.getElementsByClassName("resume-btn");
     for (i = 0; i < tablinks.length; i++) {
         tablinks[i].classList.remove("active");
     }
 
-    // Show current tab
+   
     const activeTab = document.getElementById(tabName);
     activeTab.style.display = "block";
     activeTab.classList.add("active");
