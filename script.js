@@ -2,6 +2,8 @@
 function initIntroAnimation() {
     const lettersContainer = document.getElementById('lettersContainer');
     const introSection = document.getElementById('intro');
+    const nameWrapper = document.querySelector('.name-wrapper');
+    const headerLogo = document.querySelector('.logo');
     
     if (!lettersContainer) return;
 
@@ -20,6 +22,20 @@ function initIntroAnimation() {
         });
     }, 3000);
 
+    // Animate NIVI text moving to logo position
+    setTimeout(() => {
+        if (nameWrapper && headerLogo) {
+            const headerRect = headerLogo.getBoundingClientRect();
+            const currentRect = nameWrapper.getBoundingClientRect();
+            
+            const translateX = (headerRect.left + headerRect.width / 2) - (currentRect.left + currentRect.width / 2);
+            const translateY = (headerRect.top + headerRect.height / 2) - (currentRect.top + currentRect.height / 2);
+            
+            nameWrapper.style.animation = `moveToLogo 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards`;
+            nameWrapper.style.setProperty('--translate-x', `${translateX}px`);
+            nameWrapper.style.setProperty('--translate-y', `${translateY}px`);
+        }
+    }, 4600);
    
     setTimeout(() => {
         introSection.style.pointerEvents = 'none';
@@ -81,6 +97,9 @@ function initProjectSlider() {
     const totalCards = cards.length;
     let cardsPerView = 3; 
     let currentIndex = 0;
+    let autoScrollInterval = null;
+    const AUTO_SCROLL_DELAY = 5000; // 5 seconds between auto-scrolls
+    const RESUME_DELAY = 3000; // 3 seconds after user interaction before auto-scroll resumes
 
     
     function updateCardsPerView() {
@@ -114,26 +133,53 @@ function initProjectSlider() {
     function nextSlide() {
         if (currentIndex < getMaxIndex()) {
             currentIndex++;
-            updateSlider();
+        } else {
+            currentIndex = 0; // Loop back to start for infinite scrolling
         }
+        updateSlider();
     }
 
     // Previous slide group
     function prevSlide() {
         if (currentIndex > 0) {
             currentIndex--;
-            updateSlider();
+        } else {
+            currentIndex = getMaxIndex(); // Loop to end for infinite scrolling
         }
+        updateSlider();
+    }
+
+    // Auto-scroll function
+    function startAutoScroll() {
+        if (autoScrollInterval) {
+            clearInterval(autoScrollInterval);
+        }
+        autoScrollInterval = setInterval(() => {
+            currentIndex = (currentIndex + 1) % (Math.ceil(totalCards / cardsPerView));
+            updateSlider();
+        }, AUTO_SCROLL_DELAY);
     }
 
     // Event listeners
-    nextBtn.addEventListener('click', nextSlide);
-    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', () => {
+        nextSlide();
+        clearInterval(autoScrollInterval); // Stop auto-scroll on button click
+    });
+    prevBtn.addEventListener('click', () => {
+        prevSlide();
+        clearInterval(autoScrollInterval); // Stop auto-scroll on button click
+    });
 
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight') nextSlide();
-        if (e.key === 'ArrowLeft') prevSlide();
+        if (e.key === 'ArrowRight') {
+            nextSlide();
+            clearInterval(autoScrollInterval); // Stop auto-scroll on keyboard
+        }
+        if (e.key === 'ArrowLeft') {
+            prevSlide();
+            clearInterval(autoScrollInterval); // Stop auto-scroll on keyboard
+        }
     });
 
     // Touch support for mobile
@@ -159,6 +205,7 @@ function initProjectSlider() {
             } else {
                 prevSlide(); // Swiped right
             }
+            clearInterval(autoScrollInterval); // Stop auto-scroll on swipe
         }
     }
 
@@ -174,12 +221,14 @@ function initProjectSlider() {
     // Initialize
     updateCardsPerView();
     updateSlider();
+    startAutoScroll(); // Start the infinite auto-scroll
 }
 
 document.addEventListener('DOMContentLoaded', () => {
 initIntroAnimation(); 
 initCyclingTyping(); 
 initProjectSlider(); 
+initScrollAnimations(); 
 
 // Navbar active link management with scroll detection
 const navLinks = document.querySelectorAll('.nav-links a');
@@ -216,6 +265,33 @@ function updateActiveNavLink() {
 
 // Update on scroll
 window.addEventListener('scroll', updateActiveNavLink);
+
+// ===== SCROLL ANIMATION FUNCTIONALITY =====
+function initScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements that should animate on scroll
+    const animateElements = document.querySelectorAll(
+        '.section-title, .about-wrapper, .info-card, .skill-item, .service-item'
+    );
+    
+    animateElements.forEach(element => {
+        element.classList.add('scroll-animate');
+        observer.observe(element);
+    });
+}
 
 // Click handler for manual navigation
 navLinks.forEach(link => {
