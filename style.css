@@ -2354,7 +2354,7 @@ body.blur-bg #success-modal {
         display: flex;
         flex-direction: column; /* උඩ සිට පහළට */
         text-align: center;
-        padding: 60px 15px 40px 15px;
+       padding: 60px 15px 20px 15px !important;
         gap: 10px;
         min-height: auto;
         justify-content: flex-start;
