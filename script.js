@@ -1,4 +1,35 @@
 
+// Hamburger Menu Toggle
+function initHamburgerMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const navbar = document.querySelector('.navbar');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    
+    if (!hamburger || !navbar) return;
+    
+    // Toggle menu on hamburger click
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navbar.classList.toggle('active');
+    });
+    
+    // Close menu when a link is clicked
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navbar.classList.remove('active');
+        });
+    });
+    
+    // Close menu when window is resized to desktop
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            hamburger.classList.remove('active');
+            navbar.classList.remove('active');
+        }
+    });
+}
+
 function initIntroAnimation() {
     const lettersContainer = document.getElementById('lettersContainer');
     const introSection = document.getElementById('intro');
@@ -225,6 +256,7 @@ function initProjectSlider() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+initHamburgerMenu();
 initIntroAnimation(); 
 initCyclingTyping(); 
 initProjectSlider(); 

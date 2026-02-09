@@ -45,6 +45,7 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 30px 10%;
+    position: relative;
 }
 
 .logo {
@@ -59,6 +60,12 @@ header {
 }
 
 nav {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.navbar {
     display: flex;
     align-items: center;
     gap: 40px;
@@ -117,6 +124,110 @@ nav {
     background-color: #00e699;
     transform: scale(1.08);
     box-shadow: 0 0 25px rgba(0, 255, 153, 0.6), 0 0 40px rgba(0, 255, 153, 0.3);
+}
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 6px;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: var(--accent-color);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(10px, 10px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Desktop Navbar Styles */
+@media (min-width: 769px) {
+    .hamburger {
+        display: none !important;
+    }
+    
+    .navbar {
+        position: static !important;
+        transform: translateX(0) !important;
+        background: transparent !important;
+        padding: 0 !important;
+        width: auto;
+        height: auto;
+    }
+}
+
+/* Mobile Navbar */
+@media (max-width: 768px) {
+    header {
+        padding: 20px 5%;
+    }
+    
+    .hamburger {
+        display: flex;
+        z-index: 1000;
+    }
+    
+    .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(26, 26, 26, 0.98);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        padding: 100px 20px 40px 20px;
+        gap: 0;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 999;
+        overflow-y: auto;
+    }
+    
+    .navbar.active {
+        transform: translateX(0);
+    }
+    
+    .nav-links {
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+        display: flex !important;
+    }
+    
+    .nav-links li {
+        width: 100%;
+    }
+    
+    .nav-links a {
+        display: block;
+        padding: 15px 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        font-size: 16px;
+    }
+    
+    .hire-btn {
+        width: 100%;
+        text-align: center;
+        padding: 12px 15px;
+        font-size: 14px;
+        margin-top: 20px;
+    }
 }
 
 /* Hero Section */
@@ -497,7 +608,6 @@ nav {
     .hero-image { justify-content: center; margin-bottom: 50px; }
     .hero-content p { margin: 0 auto; }
     .hero-btns { justify-content: center; }
-    .nav-links { display: none; }
     .stats { flex-wrap: wrap; gap: 30px; justify-content: center; }
 }
         #intro {
@@ -2234,4 +2344,161 @@ body.blur-bg #success-modal {
 
 .about-wrapper.animate-in {
     animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* --- FINAL MOBILE OPTIMIZED VIEW --- */
+@media screen and (max-width: 768px) {
+    
+    /* 1. Layout එකේ පිළිවෙල වෙනස් කිරීම (Text -> Image -> Content) */
+    .hero {
+        display: flex;
+        flex-direction: column; /* උඩ සිට පහළට */
+        text-align: center;
+        padding: 60px 15px 40px 15px;
+        gap: 10px;
+        min-height: auto;
+        justify-content: flex-start;
+    }
+
+    /* 2. "Hello, I am" සහ Typewriter කොටස ඉහළටම */
+    .hero-content {
+        order: 1; /* පළමුව පෙන්වීමට */
+        max-width: 100%;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .hero-content h3 {
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+    }
+
+    .hero-content h1 {
+        font-size: 1.8rem; /* Mobile එකට ගැලපෙන size එක */
+        white-space: nowrap; /* අකුරු කැඩී පල්ලෙහාට යාම වැලැක්වීමට */
+        overflow: hidden;
+        margin-bottom: 10px;
+    }
+
+    /* 3. පින්තූරය මැදට ගැනීම */
+    .hero-image-container {
+        order: 2; /* දෙවනුව පෙන්වීමට */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 280px; /* Icons වලට ඉඩ ලබා දීමට */
+        position: relative;
+        margin: 20px 0;
+    }
+
+    .profile-wrapper {
+        width: 160px;
+        height: 160px;
+        z-index: 2;
+    }
+
+    /* 4. Icons (Floating Cards) ලස්සනට පින්තූරය වටා පෙළගැස්වීම */
+    .floating-card {
+       display: none !important;
+    }
+
+    /* React Icon - වම්පස ඉහළ */
+    .card-1 { 
+        top: 20px !important; 
+        left: 15% !important; 
+        transform: rotate(-10deg);
+    } 
+
+    /* JS Icon - දකුණුපස පහළ */
+    .card-2 { 
+        bottom: 40px !important; 
+        right: 15% !important; 
+        transform: rotate(10deg);
+    }
+
+    /* 5. ඉතිරි විස්තර සහ Buttons */
+    .hero-content p {
+        order: 3;
+        font-size: 0.9rem;
+        margin: 15px 0;
+    }
+
+    .hero-btns {
+        display: flex;
+        order: 4;
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .cv-download {
+       display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 200px;  
+        margin: 0 auto;
+    }
+
+    /* Background Blur එක පාලනය කිරීම */
+    .blob-bg {
+        width: 200px;
+        height: 200px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+   
+#projects {
+        padding: 60px 0 !important;
+        height: auto !important;
+    }
+
+    /* 2. Slider එක vertical list එකකට හැරවීම */
+    .projects-slider {
+        display: flex !important;
+        flex-direction: column !important; /* එක යට එක පෙන්වීමට */
+        align-items: center !important;
+        gap: 40px !important;
+        transform: none !important; /* Slider එකේ පැත්තට යන ගතිය නැති කිරීමට */
+        padding: 0 20px !important;
+        overflow: visible !important;
+    }
+
+    /* 3. එක් එක් කාඩ් එකේ ප්‍රමාණය සකස් කිරීම */
+    .project-card {
+        width: 100% !important;
+        max-width: 340px !important; /* කාඩ් එකේ පළල පාලනය කිරීමට */
+        min-width: unset !important;
+        display: block !important; /* නොපෙනී තිබේ නම් දර්ශනය කිරීමට */
+        opacity: 1 !important;
+        transform: none !important;
+        background: #252525 !important;
+        border: 1px solid rgba(0, 255, 153, 0.2) !important;
+    }
+
+    /* 4. පින්තූරය පෙනෙන බව තහවුරු කිරීම */
+    .project-img-box {
+        height: 200px !important;
+        width: 100% !important;
+        display: block !important;
+    }
+
+    .project-img-box img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+    }
+
+    /* 5. Slider එකේ ඊතල (Arrows) සහ dots ඉවත් කිරීම */
+    .slider-nav, .slider-dots {
+        display: none !important;
+    }
+
+    /* 6. Wrapper එකේ සීමාවන් ඉවත් කිරීම */
+    .slider-wrapper {
+        overflow: visible !important;
+        width: 100% !important;
+    }
 }
