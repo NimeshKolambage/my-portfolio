@@ -722,3 +722,219 @@ function openTab(evt, tabName) {
     activeTab.classList.add("active");
     evt.currentTarget.classList.add("active");
 }
+
+/* ===== AI CHATBOT FUNCTIONALITY ===== */
+
+const chatbotResponses = {
+    greeting: [
+        "Hello! How can I assist you today? 😊",
+        "Hi there! What can I help you with?",
+        "Hey! Feel free to ask me anything about Nimesh."
+    ],
+    services: [
+        "Nimesh offers the following services:\n\n✨ Website Development - Building responsive and modern web applications\n✨ App Development - Creating functional mobile and desktop applications\n✨ Website Hosting - Professional hosting solutions\n✨ UI/UX Design - Crafting beautiful user experiences\n\nWhich service interests you?"
+    ],
+    skills: [
+        "Nimesh is skilled in:\n\n💻 Frontend: HTML5, CSS3, JavaScript\n🎨 Frameworks: React, UI/UX Design\n🔧 Backend: JavaScript, Java, Node.js\n🔌 Other: Firebase, REST APIs\n\nWould you like to know more about any specific skill?"
+    ],
+    hire: [
+        "Great! You can hire Nimesh by:\n\n📧 Email: nimeshkolambage@gmail.com\n💼 LinkedIn: linkedin.com/in/nimesh-kolambage\n📱 GitHub: github.com/NimeshKolambage\n 🔗 Visit the 'Hire me' button at the top of the page\n\nI can also help you schedule a meeting or answer any questions about rates and availability."
+    ],
+    projects: [
+        "Nimesh has worked on various projects including:\n\n🎯 Web Applications - Building interactive user interfaces\n📱 Mobile Solutions - Cross-platform applications\n🎨 Design Projects - Beautiful UI/UX implementations\n\nYou can check out all projects in the Work section of the portfolio!"
+    ],
+    experience: [
+        "Nimesh currently:\n\n🎓 Studying BSc (Hons) in Software Engineering at NIBM (2023-Present)\n📚 Previously completed Diploma in IT at NIBM (2021-2022)\n\nHe combines academic knowledge with practical experience to deliver exceptional results."
+    ],
+    default: [
+        "That's an interesting question! I'm here primarily to help with information about Nimesh Kolambage's services, skills, and portfolio. Feel free to ask about:\n\n• Services I offer\n• Technical skills\n• How to hire\n• Projects & experience\n\nOr ask anything else and I'll try my best to help! 😊"
+    ]
+};
+
+function initChatbot() {
+    const chatbotToggle = document.getElementById('chatbot-toggle');
+    const chatbotWidget = document.getElementById('chatbot-widget');
+    const chatbotClose = document.getElementById('chatbot-close');
+    const chatbotInput = document.getElementById('chatbot-input');
+    const chatbotSend = document.getElementById('chatbot-send');
+
+    if (!chatbotToggle || !chatbotWidget) return;
+
+    // Toggle chatbot visibility
+    chatbotToggle.addEventListener('click', () => {
+        chatbotWidget.classList.toggle('active');
+        chatbotToggle.classList.toggle('active');
+        
+        // Handle body scroll on mobile
+        const isMobile = window.innerWidth <= 768;
+        if (isMobile) {
+            if (chatbotWidget.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+                chatbotInput.focus();
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        }
+        
+        if (chatbotWidget.classList.contains('active')) {
+            chatbotInput.focus();
+            document.getElementById('unread-badge').style.display = 'none';
+        }
+    });
+
+    // Close chatbot
+    chatbotClose.addEventListener('click', () => {
+        chatbotWidget.classList.remove('active');
+        chatbotToggle.classList.remove('active');
+        if (window.innerWidth <= 768) {
+            document.body.style.overflow = 'auto';
+        }
+    });
+
+    // Send message on button click
+    chatbotSend.addEventListener('click', sendChatMessage);
+
+    // Listen for Enter key
+    chatbotInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            sendChatMessage();
+        }
+    });
+
+    // Handle window resize to adjust overflow
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768 && chatbotWidget.classList.contains('active')) {
+            document.body.style.overflow = 'auto';
+        }
+    });
+}
+
+function sendChatMessage() {
+    const chatbotInput = document.getElementById('chatbot-input');
+    const chatbotMessages = document.getElementById('chatbot-messages');
+    const userMessage = chatbotInput.value.trim();
+
+    if (!userMessage) return;
+
+    // Add user message to chat
+    addMessage(userMessage, 'user');
+    chatbotInput.value = '';
+
+    // Show typing indicator
+    showTypingIndicator();
+
+    // Get bot response
+    setTimeout(() => {
+        removeTypingIndicator();
+        const botResponse = getBotResponse(userMessage);
+        addMessage(botResponse, 'bot');
+    }, 800 + Math.random() * 1200);
+
+    // Auto-scroll to bottom
+    setTimeout(() => {
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }, 100);
+}
+
+function handleChatSubmit(event) {
+    if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        sendChatMessage();
+    }
+}
+
+function sendQuickReply(message) {
+    const chatbotInput = document.getElementById('chatbot-input');
+    const chatbotWidget = document.getElementById('chatbot-widget');
+    
+    if (!chatbotWidget.classList.contains('active')) {
+        document.getElementById('chatbot-toggle').click();
+    }
+    
+    chatbotInput.value = message;
+    setTimeout(() => sendChatMessage(), 200);
+}
+
+function addMessage(text, sender) {
+    const chatbotMessages = document.getElementById('chatbot-messages');
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${sender}-message`;
+
+    const messageContent = document.createElement('div');
+    messageContent.className = 'message-content';
+    messageContent.innerHTML = text;
+
+    messageDiv.appendChild(messageContent);
+    chatbotMessages.appendChild(messageDiv);
+    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+}
+
+function showTypingIndicator() {
+    const chatbotMessages = document.getElementById('chatbot-messages');
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'message bot-message';
+    typingDiv.id = 'typing-indicator';
+    
+    const content = document.createElement('div');
+    content.className = 'message-content typing-indicator';
+    content.innerHTML = '<span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>';
+    
+    typingDiv.appendChild(content);
+    chatbotMessages.appendChild(typingDiv);
+    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+}
+
+function removeTypingIndicator() {
+    const typingIndicator = document.getElementById('typing-indicator');
+    if (typingIndicator) typingIndicator.remove();
+}
+
+function getBotResponse(userMessage) {
+    const message = userMessage.toLowerCase().trim();
+
+    // Check for keywords and return appropriate response
+    if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
+        return getRandomResponse(chatbotResponses.greeting);
+    }
+    
+    if (message.includes('service') || message.includes('offer') || message.includes('what do you do')) {
+        return getRandomResponse(chatbotResponses.services);
+    }
+    
+    if (message.includes('skill') || message.includes('expertise') || message.includes('language') || message.includes('technology') || message.includes('tech')) {
+        return getRandomResponse(chatbotResponses.skills);
+    }
+    
+    if (message.includes('hire') || message.includes('contact') || message.includes('email') || message.includes('work with') || message.includes('collaborate')) {
+        return getRandomResponse(chatbotResponses.hire);
+    }
+    
+    if (message.includes('project') || message.includes('portfolio') || message.includes('work')) {
+        return getRandomResponse(chatbotResponses.projects);
+    }
+    
+    if (message.includes('experience') || message.includes('background') || message.includes('education') || message.includes('cv') || message.includes('resume')) {
+        return getRandomResponse(chatbotResponses.experience);
+    }
+
+    if (message.includes('thank') || message.includes('thanks') || message.includes('thanks!')) {
+        return "You're welcome! Is there anything else I can help you with? 😊";
+    }
+
+    if (message.includes('about') || message.includes('who') || message.includes('nimesh')) {
+        return "I'm here to help you learn about Nimesh Kolambage's services and portfolio. Nimesh is a passionate Software Developer and UI/UX enthusiast with expertise in web and app development. Ask me about his services, skills, projects, or how to hire him!";
+    }
+
+    return getRandomResponse(chatbotResponses.default);
+}
+
+function getRandomResponse(responseArray) {
+    return responseArray[Math.floor(Math.random() * responseArray.length)];
+}
+
+// Initialize chatbot when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initChatbot);
+} else {
+    initChatbot();
+}
