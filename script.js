@@ -122,17 +122,32 @@ function initProjectSlider() {
     const prevBtn = document.getElementById('sliderPrev');
     const nextBtn = document.getElementById('sliderNext');
     
-    if (!slider || !prevBtn || !nextBtn) return;
+    if (!slider || !prevBtn || !nextBtn) {
+        console.error('Slider or buttons not found');
+        return;
+    }
 
-    const cards = slider.querySelectorAll('.project-card');
-    const totalCards = cards.length;
-    let cardsPerView = 3; 
+    const originalCards = Array.from(slider.querySelectorAll('.project-card'));
+    const totalCards = originalCards.length;
+    let cardsPerView = 3;
     let currentIndex = 0;
-    let autoScrollInterval = null;
-    const AUTO_SCROLL_DELAY = 5000; // 5 seconds between auto-scrolls
-    const RESUME_DELAY = 3000; // 3 seconds after user interaction before auto-scroll resumes
+    let isMarqueeMode = true;
 
-    
+    console.log('Slider initialized with ' + totalCards + ' cards');
+
+    // Clone cards for seamless marquee loop
+    function setupMarqueeCards() {
+        const existingClones = slider.querySelectorAll('.project-card[data-clone]');
+        existingClones.forEach(clone => clone.remove());
+        
+        originalCards.forEach(card => {
+            const clone = card.cloneNode(true);
+            clone.setAttribute('data-clone', 'true');
+            slider.appendChild(clone);
+        });
+    }
+
+    // Update cards per view based on screen size
     function updateCardsPerView() {
         const width = window.innerWidth;
         if (width <= 768) {
@@ -144,115 +159,129 @@ function initProjectSlider() {
         }
     }
 
-  
+    // Get max index for manual mode
     function getMaxIndex() {
         const totalGroups = Math.ceil(totalCards / cardsPerView);
         return Math.max(0, totalGroups - 1);
     }
 
-   
+    // Update slider position for manual mode
     function updateSlider() {
         const offset = -currentIndex * 100;
         slider.style.transform = `translateX(${offset}%)`;
-        
-        // Update button states
-        prevBtn.disabled = currentIndex === 0;
-        nextBtn.disabled = currentIndex >= getMaxIndex();
     }
 
-    // Next slide group
+    // Initialize marquee - runs automatically and continuously
+    function initMarquee() {
+        setupMarqueeCards();
+        slider.classList.add('marquee-active');
+        slider.classList.remove('marquee-paused');
+        prevBtn.classList.add('marquee-mode');
+        nextBtn.classList.add('marquee-mode');
+        isMarqueeMode = true;
+        console.log('Marquee mode started');
+    }
+
+    // Stop marquee and switch to manual mode
+    function stopMarqueeAndOptions() {
+        console.log('Stopping marquee, switching to manual mode');
+        isMarqueeMode = false;
+        
+        // Remove animation and cloned cards
+        slider.classList.remove('marquee-active');
+        slider.classList.remove('marquee-paused');
+        slider.style.animation = 'none';
+        
+        const clonedCards = slider.querySelectorAll('.project-card[data-clone]');
+        clonedCards.forEach(clone => clone.remove());
+
+        // Reset to first group
+        currentIndex = 0;
+        updateCardsPerView();
+        slider.style.transform = 'translateX(0)';
+        slider.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+        
+        // Enable arrow buttons by removing marquee-mode class
+        prevBtn.classList.remove('marquee-mode');
+        nextBtn.classList.remove('marquee-mode');
+    }
+
+    // Manual navigation - next
     function nextSlide() {
+        console.log('Next slide clicked, currentIndex: ' + currentIndex + ', maxIndex: ' + getMaxIndex());
         if (currentIndex < getMaxIndex()) {
             currentIndex++;
         } else {
-            currentIndex = 0; // Loop back to start for infinite scrolling
+            currentIndex = 0; // Loop to beginning
         }
         updateSlider();
     }
 
-    // Previous slide group
+    // Manual navigation - previous
     function prevSlide() {
+        console.log('Prev slide clicked, currentIndex: ' + currentIndex);
         if (currentIndex > 0) {
             currentIndex--;
         } else {
-            currentIndex = getMaxIndex(); // Loop to end for infinite scrolling
+            currentIndex = getMaxIndex(); // Loop to end
         }
         updateSlider();
     }
 
-    // Auto-scroll function
-    function startAutoScroll() {
-        if (autoScrollInterval) {
-            clearInterval(autoScrollInterval);
+    // Pause on hover (only in marquee mode)
+    function pauseMarquee() {
+        if (isMarqueeMode) {
+            slider.classList.add('marquee-paused');
         }
-        autoScrollInterval = setInterval(() => {
-            currentIndex = (currentIndex + 1) % (Math.ceil(totalCards / cardsPerView));
-            updateSlider();
-        }, AUTO_SCROLL_DELAY);
     }
 
-    // Event listeners
-    nextBtn.addEventListener('click', () => {
+    // Resume after hover (only in marquee mode)
+    function resumeMarquee() {
+        if (isMarqueeMode) {
+            slider.classList.remove('marquee-paused');
+        }
+    }
+
+    // Arrow button click handlers - MOST IMPORTANT
+    nextBtn.addEventListener('click', function(e) {
+        console.log('Next button clicked! isMarqueeMode:', isMarqueeMode);
+        e.preventDefault();
+        e.stopPropagation();
+        
+        if (isMarqueeMode) {
+            stopMarqueeAndOptions();
+        }
         nextSlide();
-        clearInterval(autoScrollInterval); // Stop auto-scroll on button click
     });
-    prevBtn.addEventListener('click', () => {
+
+    prevBtn.addEventListener('click', function(e) {
+        console.log('Prev button clicked! isMarqueeMode:', isMarqueeMode);
+        e.preventDefault();
+        e.stopPropagation();
+        
+        if (isMarqueeMode) {
+            stopMarqueeAndOptions();
+        }
         prevSlide();
-        clearInterval(autoScrollInterval); // Stop auto-scroll on button click
     });
 
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight') {
-            nextSlide();
-            clearInterval(autoScrollInterval); // Stop auto-scroll on keyboard
-        }
-        if (e.key === 'ArrowLeft') {
-            prevSlide();
-            clearInterval(autoScrollInterval); // Stop auto-scroll on keyboard
-        }
-    });
+    // Add hover listeners to slider (pause/resume)
+    slider.addEventListener('mouseenter', pauseMarquee);
+    slider.addEventListener('mouseleave', resumeMarquee);
 
-    // Touch support for mobile
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    slider.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].clientX;
-    });
-
-    slider.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].clientX;
-        handleSwipe();
-    });
-
-    function handleSwipe() {
-        const swipeThreshold = 50;
-        const diff = touchStartX - touchEndX;
-
-        if (Math.abs(diff) > swipeThreshold) {
-            if (diff > 0) {
-                nextSlide(); // Swiped left
-            } else {
-                prevSlide(); // Swiped right
-            }
-            clearInterval(autoScrollInterval); // Stop auto-scroll on swipe
-        }
-    }
-
-    // Handle window resize
+    // Window resize handler
     window.addEventListener('resize', () => {
-        updateCardsPerView();
-        if (currentIndex > getMaxIndex()) {
-            currentIndex = getMaxIndex();
+        if (!isMarqueeMode) {
+            updateCardsPerView();
+            if (currentIndex > getMaxIndex()) {
+                currentIndex = getMaxIndex();
+            }
+            updateSlider();
         }
-        updateSlider();
     });
 
-    // Initialize
-    updateCardsPerView();
-    updateSlider();
-    startAutoScroll(); // Start the infinite auto-scroll
+    // Initialize marquee on load
+    initMarquee();
 }
 
 document.addEventListener('DOMContentLoaded', () => {

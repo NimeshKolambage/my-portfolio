@@ -1907,6 +1907,7 @@ body.blur-bg #success-modal {
     flex: 1;
     overflow: hidden;
     border-radius: 0;
+    cursor: pointer;
 }
 
 .projects-slider {
@@ -1933,6 +1934,25 @@ body.blur-bg #success-modal {
     }
 }
 
+@keyframes marqueeScroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.projects-slider.marquee-active {
+    animation: marqueeScroll 12s linear infinite !important;
+    transition: none !important;
+    cursor: pointer;
+}
+
+.projects-slider.marquee-paused {
+    animation-play-state: paused !important;
+}
+
 /* Slider Navigation Buttons */
 .slider-nav {
     width: 50px;
@@ -1952,25 +1972,25 @@ body.blur-bg #success-modal {
     position: relative;
 }
 
-.slider-nav:hover:not(:disabled) {
+.slider-nav:hover:not(.marquee-mode) {
     background: var(--accent-color);
     color: #000;
     transform: scale(1.15);
     box-shadow: 0 0 25px rgba(0, 255, 153, 0.6);
 }
 
-.slider-nav:active:not(:disabled) {
+.slider-nav:active:not(.marquee-mode) {
     transform: scale(0.95);
 }
 
-.slider-nav:disabled {
+.slider-nav.marquee-mode {
     opacity: 0.4;
     cursor: not-allowed;
     border-color: rgba(0, 255, 153, 0.2);
     color: rgba(0, 255, 153, 0.4);
 }
 
-.slider-nav:disabled:hover {
+.slider-nav.marquee-mode:hover {
     background: rgba(0, 255, 153, 0.15);
     color: rgba(0, 255, 153, 0.4);
     transform: scale(1);
