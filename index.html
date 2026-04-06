@@ -167,7 +167,7 @@
                         </div>
                         <div class="info-card">
                             <span class="year-badge">2021 - 2022</span>
-                            <h4>Diploma in IT</h4>
+                            <h4>Diploma in Software Engineering</h4>
                             <p class="institution"><i class="fas fa-university"></i>National Institute of Business Management (NIBM)</p>
                         </div>
                     </div>
@@ -197,24 +197,185 @@
                         <div class="skill-item figma-skill">
                             <i class="fab fa-figma"></i> <span>UI/UX</span>
                         </div>
+                         <div class="skill-item figma-skill">
+                            <i class="fab fa-figma"></i> <span>Flutter</span>
+                        </div>
                     </div>
                 </div>
 
-                <div id="certificates" class="tab-content">
-                    <h3 class="tab-title">Certifications</h3>
-                    <div class="resume-grid">
-                        <div class="info-card">
-                            <span class="year-badge"></span>
-                            <h4></h4>
-                            <p class="institution"></p>
-                        </div>
-                        <div class="info-card">
-                            <span class="year-badge"></span>
-                            <h4></h4>
-                            <p class="institution"></p>
-                        </div>
+               <div id="certificates" class="tab-content">
+    <h3 class="tab-title">Certifications</h3>
+
+    <div class="cert-carousel-wrap">
+        <button class="cert-arrow cert-arrow-left" onclick="certScroll(-1)">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+
+        <div class="cert-viewport">
+            <div class="cert-grid" id="certGrid">
+
+                <div class="cert-card" onclick="openCertModal(this)"
+                    data-title=" Front-End Web Development"
+                    data-issuer="University of Moratuwa"
+                    data-year="2026"
+                    data-badge="verified"
+                    data-id="HnYFHP0YuB"
+                    data-image="assets/cert1.jpg">
+                    <div class="cert-badges">
+                        <span class="cert-status verified">✦ Verified</span>
                     </div>
+                    <h4>Front-End Web Development</h4>
+                    <p class="cert-issuer">University of Moratuwa</p>
+                    <span class="cert-view-hint">Click to view →</span>
                 </div>
+
+                <div class="cert-card" onclick="openCertModal(this)"
+                    data-title="Foundations of User Experience (UX) Design"
+                    data-issuer=" Coursera"
+                    data-year="2024"
+                    data-badge="Verified"
+                     data-id=""
+                    data-image="assets/cert2.jpg">
+                    <div class="cert-badges">
+                        <span class="cert-status verified">✦ Verified</span>
+                    </div>
+                    <h4>Foundations of User Experience (UX) Design</h4>
+                    <p class="cert-issuer"> Coursera</p>
+                    <span class="cert-view-hint">Click to view →</span>
+                </div>
+
+                 <div class="cert-card" onclick="openCertModal(this)"
+                    data-title=" Docker Foundations Professional Certificate"
+                    data-issuer="LinkedIn Learning"
+                    data-year="2026"
+                    data-badge="verified"
+                     data-id=""
+                    data-image="assets/cert3.jpg">
+                    <div class="cert-badges">
+                        <span class="cert-status verified">✦ Verified</span>
+                    </div>
+                    <h4>Docker Foundations Professional Certificate</h4>
+                    <p class="cert-issuer">LinkedIn Learning</p>
+                    <span class="cert-view-hint">Click to view →</span>
+                </div>
+
+                 <div class="cert-card" onclick="openCertModal(this)"
+                    data-title=" Getting Started with MongoDB Atlas"
+                    data-issuer="MongoDB University"
+                    data-year="2026"
+                    data-badge="verified"
+                        data-id=""
+                    data-image="assets/cert4.jpg">
+                    <div class="cert-badges">
+                        <span class="cert-status verified">✦ Verified</span>
+                    </div>
+                    <h4>Getting Started with MongoDB Atlas</h4>
+                    <p class="cert-issuer">MongoDB University</p>
+                    <span class="cert-view-hint">Click to view →</span>
+                </div>
+
+              <div class="cert-card" onclick="openCertModal(this)"
+                    data-title=" API Testing Pathway"
+                    data-issuer="Postman Academy"
+                    data-year="2026"
+                    data-badge="verified"
+                        data-id=""
+                    data-image="assets/cert5.jpg">
+                    <div class="cert-badges">
+                        <span class="cert-status verified">✦ Verified</span>
+                    </div>
+                    <h4>API Testing Pathway</h4>
+                    <p class="cert-issuer">Postman Academy</p>
+                    <span class="cert-view-hint">Click to view →</span>
+                </div>
+
+               <div class="cert-card" onclick="openCertModal(this)"
+                    data-title="Project Management Foundations"
+                    data-issuer="LinkedIn Learning"
+                    data-year="2026"
+                    data-badge="verified"
+                        data-id=""
+                    data-image="assets/cert6.jpg">
+                    <div class="cert-badges">
+                        <span class="cert-status verified">✦ Verified</span>
+                    </div>
+                    <h4>Project Management Foundations</h4>
+                    <p class="cert-issuer">LinkedIn Learning</p>
+                    <span class="cert-view-hint">Click to view →</span>
+                </div>
+
+                <div class="cert-card" onclick="openCertModal(this)"
+                    data-title="Mobile Product Management"
+                    data-issuer="Uxcam Academy"
+                    data-year="2026"
+                    data-badge="verified"
+                        data-id=""
+                    data-image="assets/cert7.png">
+                    <div class="cert-badges">
+                        <span class="cert-status verified">✦ Verified</span>
+                    </div>
+                    <h4>Mobile Product Management</h4>
+                    <p class="cert-issuer">Uxcam Academy</p>
+                    <span class="cert-view-hint">Click to view →</span>
+                </div>
+
+               <div class="cert-card" onclick="openCertModal(this)"
+                    data-title="Gemini Certified Faculty"
+                    data-issuer="Google for Education"
+                    data-year="2026"
+                    data-badge="verified"
+                        data-id=""
+                    data-image="assets/cert8.jpg">
+                    <div class="cert-badges">
+                        <span class="cert-status verified">✦ Verified</span>
+                    </div>
+                    <h4>Gemini Certified Faculty</h4>
+                    <p class="cert-issuer">Google for Education</p>
+                    <span class="cert-view-hint">Click to view →</span>
+                </div>
+
+              <div class="cert-card" onclick="openCertModal(this)"
+                    data-title="API Beginner Learning Pathway"
+                    data-issuer="Postman Academy"
+                    data-year="2026"
+                    data-badge="verified"
+                        data-id=""
+                    data-image="assets/cert9.jpg">
+                    <div class="cert-badges">
+                        <span class="cert-status verified">✦ Verified</span>
+                    </div>
+                    <h4>API Beginner Learning Pathway</h4>
+                    <p class="cert-issuer">Postman Academy</p>
+                    <span class="cert-view-hint">Click to view →</span>
+                </div>
+
+              
+              <div class="cert-card" onclick="openCertModal(this)"
+                    data-title="Gemini Certified University Student"
+                    data-issuer="Google for Education"
+                    data-year="2026"
+                    data-badge="verified"
+                        data-id=""
+                    data-image="assets/cert101.jpg">
+                    <div class="cert-badges">
+                        <span class="cert-status verified">✦ Verified</span>
+                    </div>
+                    <h4>Gemini Certified University Student</h4>
+                    <p class="cert-issuer">Google for Education</p>
+                    <span class="cert-view-hint">Click to view →</span>
+                </div>
+
+            </div>
+        </div>
+
+        <button class="cert-arrow cert-arrow-right" onclick="certScroll(1)">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <!-- Dots -->
+    <div class="cert-dots" id="certDots"></div>
+</div>
             </div>
         </div>
     </div>
@@ -556,6 +717,31 @@
 
     <canvas id="atoms-canvas"></canvas>
     <div class="canvas-overlay"></div>
+
+<!-- Certification Modal Popup -->
+<div id="cert-modal" class="cert-modal" onclick="closeCertModalOutside(event)">
+    <div class="cert-modal-content">
+        <button class="cert-modal-close" onclick="closeCertModal()">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <div class="cert-modal-image-container" id="cert-modal-image-container">
+            <img id="cert-modal-image" src="assets/images.png" alt="Certification" class="cert-modal-image">
+        </div>
+        
+        <div class="cert-modal-details">
+            <h3 id="cm-title" class="cert-modal-title">Certification Title</h3>
+            <p id="cm-issuer" class="cert-modal-issuer">Issuer</p>
+            <div class="cert-modal-meta">
+                <span id="cm-year" class="cert-modal-year">2024</span>
+                <div id="cm-badge-wrap" style="display: none;">
+                    <span id="cm-badge" class="cert-modal-badge">Badge</span>
+                </div>
+            </div>
+            <p id="cm-id" class="cert-modal-id"></p>
+        </div>
+    </div>
+</div>
 
 <div id="intro">
     <div class="intro-container">

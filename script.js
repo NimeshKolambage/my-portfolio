@@ -967,3 +967,146 @@ if (document.readyState === 'loading') {
 } else {
     initChatbot();
 }
+/* ===== CERTIFICATE CAROUSEL ===== */
+(function initCertCarousel() {
+    const grid      = document.getElementById('certGrid');
+    const dotsWrap  = document.getElementById('certDots');
+    const leftBtn   = document.querySelector('.cert-arrow-left');
+    const rightBtn  = document.querySelector('.cert-arrow-right');
+
+    if (!grid) return;
+
+    const COLS       = 2;
+    const ROWS       = 2;
+    const PER_PAGE   = COLS * ROWS;          // 4 cards per page
+    const cards      = Array.from(grid.querySelectorAll('.cert-card'));
+    const total      = cards.length;
+    const totalPages = Math.ceil(total / PER_PAGE);
+    let   page       = 0;
+
+    // Build dots
+    for (let i = 0; i < totalPages; i++) {
+        const d = document.createElement('button');
+        d.className = 'cert-dot' + (i === 0 ? ' active' : '');
+        d.setAttribute('aria-label', 'Page ' + (i + 1));
+        d.addEventListener('click', () => goTo(i));
+        dotsWrap.appendChild(d);
+    }
+
+    function goTo(p) {
+        page = Math.max(0, Math.min(p, totalPages - 1));
+
+        // Show/hide cards
+        cards.forEach((c, i) => {
+            const inPage = i >= page * PER_PAGE && i < (page + 1) * PER_PAGE;
+            c.style.display = inPage ? '' : 'none';
+        });
+
+        // Update dots
+        document.querySelectorAll('.cert-dot').forEach((d, i) => {
+            d.classList.toggle('active', i === page);
+        });
+
+        // Arrow states
+        leftBtn.disabled  = page === 0;
+        rightBtn.disabled = page === totalPages - 1;
+    }
+
+    goTo(0); // init
+
+    leftBtn.addEventListener('click',  () => goTo(page - 1));
+    rightBtn.addEventListener('click', () => goTo(page + 1));
+})();
+
+
+/* ===== CERTIFICATE MODAL ===== */
+const badgeLabels = {
+    verified:     '✦ Verified',
+    gold:         '★ Gold',
+    professional: '◆ Professional',
+    advanced:     '▲ Advanced',
+    expert:       '⬡ Expert'
+};
+
+function openCertModal(card) {
+    const modal  = document.getElementById('cert-modal');
+    const title  = card.getAttribute('data-title');
+    const issuer = card.getAttribute('data-issuer');
+    const year   = card.getAttribute('data-year');
+    const badge  = card.getAttribute('data-badge');
+    const id     = card.getAttribute('data-id');
+    const image  = card.getAttribute('data-image');
+    const pdf    = card.getAttribute('data-pdf');
+
+    document.getElementById('cm-title').textContent  = title;
+    document.getElementById('cm-issuer').textContent = issuer;
+    document.getElementById('cm-year').textContent   = year;
+    document.getElementById('cm-id').textContent     = 'ID: ' + id;
+
+    const imgContainer = document.getElementById('cert-modal-image-container');
+    const imgElement = document.getElementById('cert-modal-image');
+
+    // Handle PDF or Image
+    if (pdf) {
+        // Show PDF
+        imgContainer.innerHTML = `<iframe src="${pdf}" type="application/pdf" width="100%" height="400px" style="border-radius: 10px; border: 1px solid rgba(0, 255, 153, 0.2);"></iframe>`;
+        imgContainer.style.marginBottom = '25px';
+    } else if (image) {
+        // Show Image
+        imgContainer.innerHTML = `<img id="cert-modal-image" src="${image}" alt="Certification" class="cert-modal-image" style="width: 100%; height: auto; display: block; object-fit: cover; border-radius: 10px; border: 1px solid rgba(0, 255, 153, 0.2);">`;
+        imgContainer.style.marginBottom = '25px';
+    } else {
+        // Default fallback
+        imgContainer.innerHTML = `<img src="assets/images.png" alt="Certification" class="cert-modal-image" style="width: 100%; height: auto; display: block; object-fit: cover; border-radius: 10px; border: 1px solid rgba(0, 255, 153, 0.2);">`;
+        imgContainer.style.marginBottom = '25px';
+    }
+
+    const badgeWrap = document.getElementById('cm-badge-wrap');
+    const badgeEl   = document.getElementById('cm-badge');
+
+    if (badge && badgeLabels[badge]) {
+        badgeEl.textContent     = badgeLabels[badge];
+        badgeWrap.style.display = 'flex';
+    } else {
+        badgeWrap.style.display = 'none';
+    }
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+
+    // Block copy, download, and drag operations
+    modal.addEventListener('contextmenu', e => e.preventDefault());
+    modal.addEventListener('copy', e => e.preventDefault());
+    modal.addEventListener('dragstart', e => e.preventDefault());
+    
+    // Additional protection
+    const img = document.getElementById('cert-modal-image');
+    if (img) {
+        img.addEventListener('contextmenu', e => e.preventDefault());
+        img.addEventListener('dragstart', e => e.preventDefault());
+    }
+}
+
+function closeCertModal() {
+    const modal = document.getElementById('cert-modal');
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+}
+
+function closeCertModalOutside(e) {
+    const modal = document.getElementById('cert-modal');
+    if (modal && e.target === modal) {
+        closeCertModal();
+    }
+}
+
+document.addEventListener('keydown', e => {
+    const modal = document.getElementById('cert-modal');
+    if (!modal || !modal.classList.contains('active')) return;
+    if (e.key === 'Escape') { closeCertModal(); return; }
+    if ((e.ctrlKey || e.metaKey) && ['s','p','a','c','u','j'].includes(e.key.toLowerCase())) {
+        e.preventDefault();
+    }
+});
