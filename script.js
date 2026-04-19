@@ -967,6 +967,17 @@ if (document.readyState === 'loading') {
 } else {
     initChatbot();
 }
+
+// Certificate Carousel Scroll Function
+function certScroll(direction) {
+    const grid = document.getElementById('certGrid');
+    if (!grid) return;
+    
+    const cardWidth = 280; // Width of a single card + margin
+    const scrollAmount = cardWidth * direction;
+    grid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+}
+
 /* ===== CERTIFICATE CAROUSEL ===== */
 (function initCertCarousel() {
     const grid      = document.getElementById('certGrid');
